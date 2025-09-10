@@ -79,7 +79,7 @@ fn format_lottery_output(raw: &str) -> String {
             }
             // Extra spacing before date header
             formatted.push_str("\n");
-            formatted.push_str(&format!("📅 **{}**\n\n", line));
+            formatted.push_str(&format!("📅 {}\n\n", line));
             continue;
         }
 
@@ -103,7 +103,7 @@ fn format_lottery_output(raw: &str) -> String {
             rest = Regex::new(r"\((\w+)\)")
                 .unwrap()
                 .replace_all(&rest, |caps: &regex::Captures| {
-                    format!("(**{}**)", &caps[1])
+                    format!("({})", &caps[1])
                 })
                 .to_string();
 
@@ -113,7 +113,7 @@ fn format_lottery_output(raw: &str) -> String {
                 name.to_string()
             };
 
-            current_entry = format!("**{}**: {}", full_name, rest);
+            current_entry = format!("{}: {}", full_name, rest);
         } else {
             // Line does not start with name, so append numbers to current entry
             if !current_entry.is_empty() {
